@@ -1,33 +1,80 @@
-# 🐢 Carapace - Modern WoW Addon Manager
+<div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) 
-![Windows](https://img.shields.io/badge/platform-Windows-blue)
-![Status](https://img.shields.io/badge/status-MVP-green)
-![GitHub Repo](https://img.shields.io/badge/github-mikl0s%2Fcarapace-blue?logo=github)
+<img src="assets/logo.png" alt="Carapace Logo" width="600">
 
-A powerful, modern addon manager for World of Warcraft classic/vanilla servers, designed specifically for TurtleWoW and similar communities.
+**Lightning-fast addon management with Git-powered updates, beautiful TUI, and powerful CLI**
 
-## ✨ Key Features
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Windows](https://img.shields.io/badge/platform-Windows-0078d4?logo=windows)](https://github.com/mikl0s/carapace)
+[![Python](https://img.shields.io/badge/python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![GitHub](https://img.shields.io/badge/github-mikl0s%2Fcarapace-181717?logo=github)](https://github.com/mikl0s/carapace)
+[![TurtleWoW](https://img.shields.io/badge/TurtleWoW-Compatible-3c8b3c)](https://turtle-wow.org)
 
-- **🔍 Instant Search** - Just start typing! Any letter automatically focuses search
-- **📦 Git-Based Installation** - Uses Git repositories with Windows junctions for efficient storage
-- **🎯 Smart Marking System** - Space to mark/unmark, right-click also marks
-- **🔄 Enable/Disable Without Uninstalling** - Keep addons updated but disabled
-- **🎨 Beautiful Tokyo Night Theme** - Easy on the eyes for extended use
-- **⚡ F-Key Shortcuts** - All major functions mapped to F1-F12
-- **📊 Live Counter** - Shows filtered/total addons with marked count
-- **🛡️ Preserves Manual Edits** - Wiki sync won't overwrite your custom URLs
-- **✅ Smart Sync** - Only updates when wiki changes (checks revision ID)
-- **🎯 Small Modal Overlays** - Non-intrusive confirmation dialogs
+[Features](#-features) • [Quick Start](#-quick-start) • [CLI](#-command-line-interface) • [Documentation](#-documentation) • [Contributing](#-contributing)
+
+<img src="https://github.com/user-attachments/assets/placeholder-screenshot.png" alt="Carapace TUI Screenshot" width="800">
+
+</div>
+
+---
+
+## ✨ Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 🎨 **Beautiful TUI**
+- **Tokyo Night** theme by default
+- **Instant search** - just start typing
+- **Tabbed interface** - All Addons & Installed
+- **Visual feedback** with progress indicators
+- **Smart marking** system for batch operations
+
+</td>
+<td width="50%">
+
+### ⚡ **Powerful Backend**
+- **Git-based** installation with junctions
+- **Smart sync** from TurtleWoW wiki
+- **Enable/disable** without uninstalling
+- **Override URLs** for custom repos
+- **Automatic updates** with F12
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🛠️ **Full CLI Support**
+- **Install/remove** addons from terminal
+- **Batch operations** with patterns
+- **JSON output** for scripting
+- **Profile management** (coming soon)
+- **Scriptable API** for automation
+
+</td>
+<td width="50%">
+
+### 🔒 **Smart & Safe**
+- **Preserves edits** during wiki sync
+- **Soft-delete** pattern in database
+- **Junction-based** - no file duplication
+- **Debug logging** for troubleshooting
+- **Non-destructive** operations
+
+</td>
+</tr>
+</table>
 
 ## 🚀 Quick Start
 
-### Requirements
+### Prerequisites
 
-- **Windows** (7/10/11)
-- **Python 3.11+** (if running from source)
+- **Windows** 10/11 (Windows 7 compatible)
+- **Python** 3.11+ 
 - **Git** (for addon installation)
-- **WoW Classic/TurtleWoW** client
+- **TurtleWoW** or vanilla WoW client
 
 ### Installation
 
@@ -39,219 +86,219 @@ cd carapace
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the TUI
+# Launch the TUI
 python -m carapace.tui
 ```
 
-### First Run
+## 🖥️ Terminal User Interface
 
-1. **Auto-detects** TurtleWoW installation from registry
-2. **Creates** necessary folders (`.repos`, database)
-3. **Syncs** addon database from wiki
-4. **Applies** Tokyo Night theme automatically
+### Keyboard Shortcuts
 
-## ⌨️ Keyboard Shortcuts
-
-### Navigation & Actions
+<details>
+<summary><b>All Addons Tab</b></summary>
 
 | Key | Action | Description |
 |-----|--------|-------------|
-| **Any Letter** | Search | Auto-focuses search and types |
-| **↑↓** | Navigate | Move through addon list |
-| **Enter** | Quick Install | Shows confirmation modal |
-| **Space** | Mark/Unmark | Select for batch operations |
-| **Right Click** | Mark/Unmark | Alternative marking method |
-| **Tab** | Switch Tabs | Toggle All/Installed tabs |
-| **ESC** | Exit | Close the application |
+| **Any Letter** | Search | Auto-focuses search field |
+| **Enter** | Install | Quick install with confirmation |
+| **Space** | Mark | Select for batch operations |
+| **Tab** | Switch Tab | Navigate between tabs |
+| **F1** | Help | Show help screen |
+| **F2** | Install Marked | Batch install |
+| **F3** | Uninstall Marked | Batch remove |
+| **F4** | Enable/Disable | Toggle addon state |
+| **F5** | Update | Update selected addon |
+| **F6** | Mark All | Select all visible |
+| **F7** | Unmark All | Clear selection |
+| **F8** | Sync Wiki | Update from TurtleWoW |
+| **F9** | Edit | Modify addon details |
+| **F12** | Update All | Sync + update installed |
+| **ESC** | Exit | Close application |
 
-### Function Keys (All Addons Tab)
+</details>
 
+<details>
+<summary><b>Installed Tab</b></summary>
+
+| Key | Action | Description |
+|-----|--------|-------------|
+| **F3** | Uninstall | Remove selected |
+| **F4** | Enable/Disable | Toggle state |
+| **F5** | Update | Git pull latest |
+| **F6** | Mark All | Select all |
+| **F7** | Unmark All | Clear selection |
+| **F12** | Update All | Update all installed |
+
+</details>
+
+## 💻 Command Line Interface
+
+Carapace provides a full-featured CLI for automation and scripting:
+
+### Basic Commands
+
+```bash
+# Install an addon
+python -m carapace install pfQuest
+
+# Remove an addon
+python -m carapace remove pfQuest
+
+# Update addons
+python -m carapace update pfQuest
+python -m carapace update --all
+
+# Enable/disable without removing
+python -m carapace disable pfQuest
+python -m carapace enable pfQuest
 ```
-F1 Help           F2 Install         F3 Uninstall      F4 Enable/Disable
-F5 Update Addon   F6 Mark All        F7 Unmark All     F8 Update DB from Wiki
-F9 Edit Addon     ESC Exit           F12 Update DB + auto-update all
+
+### Advanced Usage
+
+```bash
+# List addons with filters
+python -m carapace list --installed
+python -m carapace list --tag "Class"
+python -m carapace list --search "quest"
+
+# Batch operations
+python -m carapace install pfQuest BigWigs KTM
+python -m carapace remove --pattern "^DBM-*"
+
+# JSON output for scripting
+python -m carapace list --json | jq '.[] | select(.installed == true)'
+
+# Set custom repository
+python -m carapace config --addon pfQuest --repo https://github.com/custom/repo
+
+# Sync from wiki
+python -m carapace sync
 ```
 
-### Function Keys (Installed Tab)
+### Profiles (Coming Soon)
 
+```bash
+# Create profiles for different characters
+python -m carapace profile create warrior
+python -m carapace profile switch mage
+python -m carapace profile list
 ```
-F1 Help           F3 Uninstall      F4 Enable/Disable  F5 Update Addon
 
-F6 Mark All       F7 Unmark All     F12 Update All     ESC Exit
-```
+## 🏗️ Architecture
 
-## 🎯 Core Features Explained
-
-### Git-Based Installation
+### Directory Structure
 
 ```
 Interface/AddOns/
-├── .repos/                    # Hidden folder with Git repositories
-│   ├── pfQuest/              # Full Git repository
-│   └── BigWigs/              # Full Git repository
-├── pfQuest → .repos/pfQuest  # Windows junction (like a shortcut)
-└── BigWigs → .repos/BigWigs  # Windows junction
+├── .repos/                    # Git repositories (hidden)
+│   ├── pfQuest/              # Full git repo
+│   └── BigWigs/              # Full git repo
+├── pfQuest → .repos/pfQuest  # Junction (like symlink)
+└── BigWigs → .repos/BigWigs  # Junction
 ```
 
-**Benefits:**
-- Single source of truth in `.repos`
-- Easy updates with `git pull`
-- Enable/disable by adding/removing junctions
-- No duplicate files
+### How It Works
+
+1. **Git Clone** → Addons cloned to `.repos/` folder
+2. **Junction Creation** → Windows junctions link to `AddOns/`
+3. **Enable/Disable** → Add/remove junctions without deleting
+4. **Updates** → Simple `git pull` in `.repos/`
+5. **No Duplication** → Single source of truth
+
+## 📊 Database
+
+SQLite database at `%APPDATA%\Carapace\app.db`:
+
+- **Soft deletes** - Never lose data
+- **Override URLs** - Custom repo support
+- **Event logging** - Full audit trail
+- **Tag system** - Categorized addons
+- **Settings** - User preferences
+
+## 🎯 Key Features
+
+### Git-Powered Updates
+- Clone once, update forever
+- Bandwidth efficient
+- Version history available
+- Rollback capability
 
 ### Smart Wiki Sync
+- Checks revision before updating
+- Preserves manual edits
+- Lightweight API calls
+- Automatic tag merging
 
-The F8 sync feature:
-1. **Checks revision ID** via MediaWiki API (lightweight)
-2. **Skips if unchanged** - no database modifications
-3. **Preserves manual edits** - keeps override URLs
-4. **Only merges tags** for manually edited addons
-
-### Marking System
-
-- **Visual feedback**: Marked addons show `[M]` prefix
-- **Persistent**: Marked addons stay at top when filtering
-- **Batch operations**: F2 installs all marked, F3 uninstalls all marked
-- **Quick selection**: F6 marks all visible, F7 clears all marks
-
-### Modal Overlays
-
-- **Transparent background** - TUI remains visible
-- **Small centered dialogs** - 50x13 for confirmations
-- **Arrow key navigation** - Left/Right to select Yes/No
-- **Visual focus** - Selected button highlighted in theme color
-
-## 🛠️ Advanced Configuration
-
-### Database Schema
-
-Located at `%APPDATA%\Carapace\app.db`:
-
-- **addons** - Main addon repository (name, repo_url, override_url, tags)
-- **installed** - Tracks installed addons and their paths
-- **settings** - Stores preferences and wiki revision
-- **events** - Audit trail of all operations
-- **addon_history** - Tracks changes over time
-
-### Override URLs
-
-When an addon's repository URL is wrong:
-
-1. Press **F9** to edit addon
-2. Set the **Override URL** field
-3. This URL takes precedence over wiki URL
-4. Protected from wiki sync overwrites
-
-### Manual Edit Protection
-
-Addons with `override_url` set are protected:
-- Wiki sync only updates their tags
-- Name, description, repo_url preserved
-- Ensures your fixes aren't lost
-
-**Smart Protection**: When you edit an addon's name or description without setting an override URL, the system automatically sets `override_url = repo_url` to protect your changes from being overwritten by wiki sync. The override field appears empty in the edit dialog when this auto-protection is active.
-
-## 🐛 Troubleshooting
-
-### Debug Logs
-
-Every session creates `tui_debug_YYYYMMDD_HHMMSS.log`
-
-Check latest log:
-```powershell
-Get-ChildItem tui_debug_*.log | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-```
-
-### Common Issues
-
-**Enter key doesn't work**
-- Fixed: Uses worker thread for modal display
-
-**Duplicate addons in list**
-- Run `python fix_addon_duplicates.py`
-- Merges duplicates, preserves tags
-
-**Wiki sync overwrites my changes**
-- Fixed: Sync now preserves override URLs
-- Only updates unmodified addons
-
-**Can't see which button is selected**
-- Fixed: Focus state now shows with theme colors
-- Arrow keys navigate between Yes/No
-
-## 📊 Project Architecture
-
-### Core Components
-
-1. **Database Layer** (`carapace/db.py`)
-   - Soft-delete pattern (deleted_at_utc)
-   - JSON storage for tags
-   - Override URL support
-
-2. **Installer** (`carapace/installer.py`)
-   - Git clone → `.repos/`
-   - Junction creation → `AddOns/`
-   - Zip fallback for non-Git sources
-   - Subfolder detection for nested addons
-
-3. **TUI** (`carapace/tui.py`)
-   - Textual framework
-   - Worker threads for async operations
-   - Modal overlays with ModalScreen
-   - Theme-aware styling
-
-4. **Parser** (`carapace/parser.py`)
-   - Wiki HTML parsing
-   - Quirks handling for inconsistencies
-   - Tag extraction and categorization
+### Junction System
+- No file duplication
+- Instant enable/disable
+- Clean uninstalls
+- Space efficient
 
 ## 🤝 Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-### Development Workflow
+### Development
 
-1. **Always check debug logs** before fixing issues
-2. **Update PROJECT_STATUS.md** after changes
-3. **Test with actual TurtleWoW** installation
-4. **Follow soft-delete pattern** in database
+```bash
+# Run tests
+python -m pytest tests/
 
-## 📜 Recent Updates
+# Check code style
+python -m black carapace/
+python -m ruff check carapace/
 
-- **Smart Wiki Sync** - Checks revision before updating
-- **Manual Edit Protection** - Override URLs preserved
-- **Small Modal Overlays** - Non-intrusive confirmations
-- **Arrow Key Navigation** - For modal buttons
-- **Right-Click Marking** - Alternative selection method
-- **Duplicate Fix Script** - Cleans database duplicates
-- **Live Addon Counter** - Shows filtered/total/marked
+# Build executable (coming soon)
+python -m pyinstaller carapace.spec
+```
 
 ## 📈 Performance
 
 - **858 addons** load in < 1 second
-- **Wiki revision check** uses API (10KB vs 500KB+)
-- **Batch operations** handle 100+ addons smoothly
-- **Search** is instant with no delay
+- **Instant search** with no delay
+- **Batch operations** handle 100+ addons
+- **Minimal memory** footprint
 
-## 🙏 Credits
+## 🐛 Debug Mode
 
-- Created for the **TurtleWoW** community
-- Built with [Textual](https://github.com/Textualize/textual) TUI framework
-- Theme: [Tokyo Night](https://github.com/enkia/tokyo-night-vscode-theme)
-- Icons inspired by classic WoW
+Debug logs are automatically created:
 
-## 📋 Status
+```powershell
+# Find latest log
+Get-ChildItem tui_debug_*.log | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 
-See [PROJECT_STATUS.md](docs/PROJECT_STATUS.md) for detailed progress.
+# View log
+Get-Content (Get-ChildItem tui_debug_*.log | Sort-Object LastWriteTime -Descending | Select-Object -First 1)
+```
 
-**Current Version**: MVP (Functional)
-- ✅ Core features complete
-- ✅ Database management solid
-- ✅ Git installation working
-- ✅ Wiki sync with protection
-- ✅ Modal overlays implemented
-- 🔄 Profile support planned
+## 📚 Documentation
+
+- [Installation Guide](docs/INSTALLATION.md)
+- [User Manual](docs/USER_MANUAL.md)
+- [CLI Reference](docs/CLI_REFERENCE.md)
+- [API Documentation](docs/API.md)
+- [Project Status](docs/PROJECT_STATUS.md)
+
+## 🙏 Acknowledgments
+
+- **TurtleWoW Community** - For the amazing vanilla+ experience
+- **[Textual](https://github.com/Textualize/textual)** - Beautiful TUI framework
+- **[Tokyo Night](https://github.com/enkia/tokyo-night-vscode-theme)** - Gorgeous theme
+- **Contributors** - Everyone who has helped improve Carapace
+
+## 📜 License
+
+MIT License - See [LICENSE](LICENSE) for details
 
 ---
 
+<div align="center">
+
+**Made with 💚 for the TurtleWoW Community**
+
 *Slow and steady wins the raid* 🐢
+
+[Report Bug](https://github.com/mikl0s/carapace/issues) • [Request Feature](https://github.com/mikl0s/carapace/issues) • [Wiki](https://github.com/mikl0s/carapace/wiki)
+
+</div>
