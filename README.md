@@ -60,7 +60,7 @@
 
 ### 🔒 **Smart & Safe**
 - **Auto-updates** - Updates from GitHub
-- **Pre-populated DBe** - 858+ addons ready
+- **Pre-populated DB** - 858+ addons
 - **Preserves edits** during wiki sync
 - **Junction-based** - no file duplication
 - **Non-destructive** operations
