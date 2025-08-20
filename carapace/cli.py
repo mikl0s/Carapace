@@ -757,6 +757,82 @@ def version():
     console.print(f"[bold cyan]Carapace[/bold cyan] v{__version__}")
     console.print("TurtleWoW Addon Manager")
     console.print("https://github.com/mikl0s/carapace")
+    
+    # Check for app updates
+    from carapace.app_updater import check_for_app_updates
+    update_info = check_for_app_updates()
+    if update_info:
+        console.print(f"\n[yellow]Update available: v{update_info['new_version']}[/yellow]")
+        console.print(f"Run 'carapace self-update' to update")
+
+@app.command()
+def self_update(
+    check_only: bool = typer.Option(False, "--check", "-c", help="Only check for updates, don't install")
+):
+    """Check for and install Carapace application updates"""
+    from carapace.app_updater import ApplicationUpdater
+    
+    console.print(f"[cyan]Current version:[/cyan] v{__version__}")
+    console.print("[cyan]Checking for updates...[/cyan]")
+    
+    updater = ApplicationUpdater()
+    update_available, release = updater.check_for_updates()
+    
+    if not update_available:
+        console.print("[green]✓ Carapace is up to date![/green]")
+        return
+    
+    if not release:
+        console.print("[red]✗ Could not check for updates[/red]")
+        raise typer.Exit(1)
+    
+    # Show update information
+    console.print(f"\n[green]Update available![/green]")
+    console.print(f"[cyan]New version:[/cyan] {release['tag_name']}")
+    console.print(f"[cyan]Release date:[/cyan] {release['published_at'][:10]}")
+    
+    if release.get('body'):
+        console.print("\n[cyan]Release notes:[/cyan]")
+        # Show first 5 lines of release notes
+        lines = release['body'].split('\n')[:5]
+        for line in lines:
+            if line.strip():
+                console.print(f"  {line}")
+        if len(release['body'].split('\n')) > 5:
+            console.print("  ...")
+    
+    console.print(f"\n[dim]Full release: {release['html_url']}[/dim]")
+    
+    if check_only:
+        return
+    
+    # Check if running from source
+    if not getattr(sys, 'frozen', False):
+        console.print("\n[yellow]Note: Running from source code.[/yellow]")
+        console.print("Please download the latest release manually from:")
+        console.print(f"[link]{release['html_url']}[/link]")
+        return
+    
+    # Confirm update
+    if not typer.confirm("\nDo you want to install this update?"):
+        console.print("[yellow]Update cancelled[/yellow]")
+        return
+    
+    # Perform update
+    console.print("\n[cyan]Downloading update...[/cyan]")
+    
+    with console.status("[cyan]Installing update...[/cyan]"):
+        success = updater.perform_update(release)
+    
+    if success:
+        console.print("[green]✓ Update downloaded and installed![/green]")
+        console.print("[yellow]Carapace will restart with the new version...[/yellow]")
+        raise typer.Exit(0)
+    else:
+        console.print("[red]✗ Failed to install update[/red]")
+        console.print("Please download manually from:")
+        console.print(f"[link]{release['html_url']}[/link]")
+        raise typer.Exit(1)
 
 @app.command()
 def update_db(

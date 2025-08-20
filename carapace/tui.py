@@ -835,6 +835,18 @@ class CarapaceTUI(App):
         
         return text
     
+    @work(exclusive=True, thread=True)
+    def check_for_app_updates(self) -> None:
+        """Check for application updates in background"""
+        try:
+            from carapace.app_updater import check_for_app_updates
+            update_info = check_for_app_updates()
+            if update_info:
+                msg = f"Update available: v{update_info['new_version']} (current: v{update_info['current_version']})"
+                self.call_from_thread(self.notify, msg, severity="information", timeout=10)
+        except Exception as e:
+            logger.debug(f"Could not check for app updates: {e}")
+    
     def on_mount(self) -> None:
         """Called when app is mounted"""
         # Set the Tokyo Night theme
@@ -847,6 +859,9 @@ class CarapaceTUI(App):
             action_bar.update(self.format_action_bar("all"))
         except:
             pass
+        
+        # Check for application updates in background (non-blocking)
+        self.check_for_app_updates()
         
         try:
             action_bar_installed = self.query_one("#action-bar-installed", Static)
