@@ -2,28 +2,37 @@
 Terminal User Interface for Carapace using Textual
 """
 
+import os
 import logging
 from datetime import datetime
 
-# Set up debug logging to file ONLY - no console output
-log_file = f'tui_debug_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
+# Debug flag - set to False for production builds
+DEBUG_ENABLED = os.environ.get('CARAPACE_DEBUG', 'false').lower() == 'true'
 
-# Clear any existing handlers to ensure no console output
-root_logger = logging.getLogger()
-root_logger.handlers = []
-
-# Add only file handler
-file_handler = logging.FileHandler(log_file)
-file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-root_logger.addHandler(file_handler)
-root_logger.setLevel(logging.DEBUG)
-
-# Ensure no console output
-logging.getLogger().handlers = [h for h in logging.getLogger().handlers if not isinstance(h, logging.StreamHandler)]
-
-logger = logging.getLogger(__name__)
-logger.info(f"Starting TUI debug log in {log_file}")
+if DEBUG_ENABLED:
+    # Set up debug logging to file ONLY - no console output
+    log_file = f'tui_debug_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
+    
+    # Clear any existing handlers to ensure no console output
+    root_logger = logging.getLogger()
+    root_logger.handlers = []
+    
+    # Add only file handler
+    file_handler = logging.FileHandler(log_file)
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    root_logger.addHandler(file_handler)
+    root_logger.setLevel(logging.DEBUG)
+    
+    # Ensure no console output
+    logging.getLogger().handlers = [h for h in logging.getLogger().handlers if not isinstance(h, logging.StreamHandler)]
+    
+    logger = logging.getLogger(__name__)
+    logger.info(f"Starting TUI debug log in {log_file}")
+else:
+    # Production mode - disable all logging
+    logging.disable(logging.CRITICAL)
+    logger = logging.getLogger(__name__)
 
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal, Vertical, ScrollableContainer, Center

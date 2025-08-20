@@ -758,6 +758,77 @@ def version():
     console.print("TurtleWoW Addon Manager")
     console.print("https://github.com/mikl0s/carapace")
 
+@app.command()
+def update_db(
+    force: bool = typer.Option(False, "--force", "-f", help="Force download even if up to date"),
+    check_only: bool = typer.Option(False, "--check", "-c", help="Only check for updates, don't download")
+):
+    """Check for and download database updates from GitHub"""
+    from carapace.updater import DatabaseUpdater
+    from carapace.db import Database
+    
+    # Get database path
+    db = Database()
+    db_path = Path(db.db_path)
+    db.close()
+    
+    updater = DatabaseUpdater(db_path)
+    
+    # Show current database info
+    info = updater.get_database_info()
+    if info['exists']:
+        console.print(f"[cyan]Current database:[/cyan]")
+        console.print(f"  Version: {info.get('version', 'unknown')}")
+        console.print(f"  Addons: {info.get('addon_count', 'unknown')}")
+        console.print(f"  Updated: {info.get('updated', 'unknown')}")
+    else:
+        console.print("[yellow]No local database found[/yellow]")
+    
+    console.print()
+    
+    # Check for updates
+    console.print("[cyan]Checking for updates...[/cyan]")
+    update_available, remote_manifest = updater.check_for_updates()
+    
+    if remote_manifest:
+        console.print(f"[cyan]Remote database:[/cyan]")
+        console.print(f"  Version: {remote_manifest.get('version', 'unknown')}")
+        console.print(f"  Addons: {remote_manifest.get('addon_count', 'unknown')}")
+        console.print(f"  Updated: {remote_manifest.get('updated', 'unknown')}")
+        console.print(f"  Size: {remote_manifest.get('file_size', 0) / 1024:.1f} KB")
+    
+    if check_only:
+        if update_available:
+            console.print("\n[green]✓ Update available![/green]")
+        else:
+            console.print("\n[green]✓ Database is up to date[/green]")
+        return
+    
+    if not update_available and not force:
+        console.print("\n[green]✓ Database is up to date[/green]")
+        return
+    
+    if force:
+        console.print("\n[yellow]Forcing database download...[/yellow]")
+    else:
+        console.print("\n[yellow]Downloading update...[/yellow]")
+    
+    # Download the update
+    if force and remote_manifest:
+        checksum = remote_manifest.get('checksum')
+        success = updater.download_database(checksum)
+        if success:
+            with open(updater.manifest_path, 'w') as f:
+                import json
+                json.dump(remote_manifest, f, indent=2)
+    else:
+        success = updater.update_database()
+    
+    if success:
+        console.print("[green]✓ Database updated successfully![/green]")
+    else:
+        console.print("[red]✗ Failed to update database[/red]")
+
 @app.callback(invoke_without_command=True)
 def main(
     ctx: typer.Context,
