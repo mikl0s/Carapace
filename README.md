@@ -30,6 +30,7 @@
 - **Visual feedback** with indicators
 - **Smart marking** batch operations
 
+</br>
 </td>
 <td width="50%">
 
@@ -40,6 +41,7 @@
 - **Override URLs** for custom repos
 - **Automatic updates** with F12
 
+</br>
 </td>
 </tr>
 <tr>
@@ -52,16 +54,18 @@
 - **Profile management** (coming soon)
 - **Scriptable API** for automation
 
+</br>
 </td>
 <td width="50%">
 
 ### 🔒 **Smart & Safe**
-- **Auto-updates** - App and database updates from GitHub
-- **Pre-populated database** - 858 addons ready on first run
+- **Auto-updates** - Updates from GitHub
+- **Pre-populated database** - 858 addons
 - **Preserves edits** during wiki sync
 - **Junction-based** - no file duplication
 - **Non-destructive** operations
 
+</br>
 </td>
 </tr>
 </table>
