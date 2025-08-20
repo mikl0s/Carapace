@@ -7,12 +7,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Windows](https://img.shields.io/badge/platform-Windows-0078d4?logo=windows)](https://github.com/mikl0s/carapace)
 [![Python](https://img.shields.io/badge/python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![GitHub](https://img.shields.io/badge/github-mikl0s%2Fcarapace-181717?logo=github)](https://github.com/mikl0s/carapace)
 [![TurtleWoW](https://img.shields.io/badge/TurtleWoW-Compatible-3c8b3c)](https://turtle-wow.org)
 
 [Features](#-features) • [Quick Start](#-quick-start) • [CLI](#-command-line-interface) • [Documentation](#-documentation) • [Contributing](#-contributing)
 
-<img src="https://github.com/user-attachments/assets/placeholder-screenshot.png" alt="Carapace TUI Screenshot" width="800">
+<img src="assets/all_addons.png" alt="Carapace TUI Screenshot - All Addons" width="400"><img src="assets/installed.png" alt="Carapace TUI Screenshot - Installed Addons" width="400">
 
 </div>
 
