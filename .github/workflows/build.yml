@@ -2,11 +2,12 @@ name: Build & Release Carapace (Windows)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]     # build on pushes to main
+    tags:                   # and also when pushing version tags
+      - 'v*'
   pull_request:
     branches: [ main ]
-  tags:
-    - "v*"
+  workflow_dispatch: {}     # manual "Run workflow" button
 
 jobs:
   build-windows:
@@ -18,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
       - name: Install dependencies
         run: |
@@ -33,7 +34,7 @@ jobs:
             --collect-all rich `
             carapace/__main__.py
 
-      - name: Upload build artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: Carapace-Windows
