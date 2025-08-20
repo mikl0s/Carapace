@@ -1,5 +1,8 @@
 name: Build & Release Carapace (Windows)
 
+permissions:
+  contents: write   # needed for creating releases & uploading assets
+
 on:
   push:
     branches: [ main ]     # build on pushes to main
