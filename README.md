@@ -60,7 +60,7 @@
 
 ### 🔒 **Smart & Safe**
 - **Auto-updates** - Updates from GitHub
-- **Pre-populated database** - 858 addons
+- **Pre-populated DBe** - 858+ addons ready
 - **Preserves edits** during wiki sync
 - **Junction-based** - no file duplication
 - **Non-destructive** operations
@@ -200,7 +200,7 @@ python -m carapace profile list
 
 ```
 Interface/AddOns/
-├── .repos/                    # Git repositories (hidden)
+├── .repos/                   # Git repositories (hidden)
 │   ├── pfQuest/              # Full git repo
 │   └── BigWigs/              # Full git repo
 ├── pfQuest → .repos/pfQuest  # Junction (like symlink)
@@ -275,26 +275,6 @@ python -m pyinstaller carapace.spec
 - **Instant search** with no delay
 - **Batch operations** handle 100+ addons
 - **Minimal memory** footprint
-
-## 🐛 Debug Mode
-
-Debug logs are automatically created:
-
-```powershell
-# Find latest log
-Get-ChildItem tui_debug_*.log | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-
-# View log
-Get-Content (Get-ChildItem tui_debug_*.log | Sort-Object LastWriteTime -Descending | Select-Object -First 1)
-```
-
-## 📚 Documentation
-
-- [Installation Guide](docs/INSTALLATION.md)
-- [User Manual](docs/USER_MANUAL.md)
-- [CLI Reference](docs/CLI_REFERENCE.md)
-- [API Documentation](docs/API.md)
-- [Project Status](docs/PROJECT_STATUS.md)
 
 ## 🙏 Acknowledgments
 
