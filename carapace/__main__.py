@@ -9,8 +9,8 @@ import sys
 def main():
     # If no arguments (just 'python -m carapace'), launch TUI
     if len(sys.argv) == 1:
-        from carapace.tui import CarapaceApp
-        app = CarapaceApp()
+        from carapace.tui import CarapaceTUI
+        app = CarapaceTUI()
         app.run()
     else:
         # Otherwise use the CLI
