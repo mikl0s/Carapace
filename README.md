@@ -8,6 +8,9 @@
 [![Windows](https://img.shields.io/badge/platform-Windows-0078d4?logo=windows)](https://github.com/mikl0s/carapace)
 [![Python](https://img.shields.io/badge/python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![TurtleWoW](https://img.shields.io/badge/TurtleWoW-Compatible-3c8b3c)](https://turtle-wow.org)
+[![Downloads](https://img.shields.io/github/downloads/mikl0s/Carapace/total.svg)](https://github.com/mikl0s/Carapace/releases)
+[![Downloads Latest](https://img.shields.io/github/downloads/mikl0s/Carapace/latest/total.svg)](https://github.com/mikl0s/Carapace/releases/latest)
+
 
 [Features](#-features) • [Quick Start](#-quick-start) • [CLI](#-command-line-interface) • [Documentation](#-documentation) • [Contributing](#-contributing)
 
