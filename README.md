@@ -26,9 +26,9 @@
 ### 🎨 **Beautiful TUI**
 - **Tokyo Night** theme by default
 - **Instant search** - just start typing
-- **Tabbed interface** - All Addons & Installed
-- **Visual feedback** with progress indicators
-- **Smart marking** system for batch operations
+- **Tabbed interface** 
+- **Visual feedback** with indicators
+- **Smart marking** batch operations
 
 </td>
 <td width="50%">
@@ -56,10 +56,10 @@
 <td width="50%">
 
 ### 🔒 **Smart & Safe**
+- **Auto-updates** - App and database updates from GitHub
+- **Pre-populated database** - 858 addons ready on first run
 - **Preserves edits** during wiki sync
-- **Soft-delete** pattern in database
 - **Junction-based** - no file duplication
-- **Debug logging** for troubleshooting
 - **Non-destructive** operations
 
 </td>
@@ -150,6 +150,13 @@ python -m carapace update --all
 # Enable/disable without removing
 python -m carapace disable pfQuest
 python -m carapace enable pfQuest
+
+# Check for Carapace updates
+python -m carapace self-update --check
+python -m carapace self-update
+
+# Update addon database from GitHub
+python -m carapace update-db
 ```
 
 ### Advanced Usage
@@ -215,6 +222,12 @@ SQLite database at `%APPDATA%\Carapace\app.db`:
 - **Settings** - User preferences
 
 ## 🎯 Key Features
+
+### Auto-Update System
+- **Application updates** - Automatic notification and one-click update
+- **Database updates** - Pre-populated 858 addons, auto-downloads on first run
+- **Version checking** - Checks GitHub for latest releases
+- **Self-update command** - `carapace self-update` to upgrade
 
 ### Git-Powered Updates
 - Clone once, update forever
